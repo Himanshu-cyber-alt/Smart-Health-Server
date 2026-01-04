@@ -1,4 +1,4 @@
-import admin from "../📁 firebaseAdmin.js";
+import admin from "../firebaseAdmin.js";
 import pool from "../config/db.js";
 import jwt from "jsonwebtoken";
 
