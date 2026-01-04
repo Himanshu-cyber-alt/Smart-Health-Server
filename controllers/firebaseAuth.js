@@ -1,12 +1,12 @@
-import admin from "../firebaseAdmin.js";
+import admin from "firebase-admin";
 import pool from "../config/db.js";
 import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
 
-
-
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
+serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
 
 
   export const firebaseAuthController = async (req, res) => {
