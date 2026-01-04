@@ -12,7 +12,7 @@ serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
   export const firebaseAuthController = async (req, res) => {
     try {
       const  idToken  = req.body.token;
-      console.log("token ",idToken)
+      console.log("token ==> ",idToken)
       if (!idToken) {
         return res.status(400).json({ message: "Token missing" });
       }
