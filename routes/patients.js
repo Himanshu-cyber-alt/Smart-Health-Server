@@ -41,6 +41,10 @@ router.post("/register", async (req, res) => {
 
     const patient = result.rows[0];
 
+   await pool.query(`INSERT INTO patient_profiles (patient_id)
+                        VALUES ($1)`,[patient.patient_id])
+
+
     const token = jwt.sign(
       { id: patient.patient_id, role: "patient" },
       JWT_SECRET,
