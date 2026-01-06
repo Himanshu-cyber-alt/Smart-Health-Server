@@ -80,4 +80,36 @@ export const getProfile = async (req, res) => {
 };
 
 
+export const deleteProfile = async (req, res) => {
+  try {
+    const { patient_id } = req.params;
+
+    console.log("============",patient_id)
+
+    console.log("Deleting patient id =>", patient_id);
+
+    // 1️⃣ Check if profile exists
+    const checkProfile = await pool.query(
+      "SELECT 1 FROM patients WHERE patient_id = $1",
+      [patient_id]
+    );
+
+    if (checkProfile.rowCount === 0) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+
+    // 2️⃣ Delete profile
+    await pool.query(
+      "DELETE FROM patients WHERE patient_id = $1",
+      [patient_id]
+    );
+
+    // 3️⃣ Success response
+    res.status(200).json({ message: "Profile deleted successfully" });
+
+  } catch (err) {
+    console.error("Error deleting profile:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
