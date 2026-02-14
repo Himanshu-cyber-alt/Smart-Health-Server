@@ -16,6 +16,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 router.post("/register", async (req, res) => {
   const { email, password } = req.body;
 
+   console.log("Email => ",email,"  Password => ",password);
   if (!email || !password) {
     return res.status(400).json({ message: "Email and password required" });
   }
@@ -39,6 +40,8 @@ router.post("/register", async (req, res) => {
       [email, hashedPassword || null]
     );
 
+     console.log(result);
+     
     const patient = result.rows[0];
 
    await pool.query(`INSERT INTO patient_profiles (patient_id)
